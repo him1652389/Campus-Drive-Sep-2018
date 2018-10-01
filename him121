@@ -1,0 +1,45 @@
+A Cricket board wants to store data of League matches like IPL in Databases for two seasons. Create schema to store data of League Teams, League players, Legaue Match Schedule. They also want to store data of matches played and score of matches and of each player in particular match. Some of the teams can be named after City
+
+Team Mumbai
+Team Chennai
+Team Pune
+Write a program to display following results :
+
+Get Player who own Purple Cap.
+
+Get Player who own Orange Cap.
+
+Get Player who is most consistent (left to interpreation) and from which Team.
+
+Get Player information about his average run scored when he played for Team Mumbai for entire Season 1 and average run scored when same Player played with Team Chennai Kings in Season 2.
+
+Get Player Performance Increases or Degraded in Percentage from Both Season. [similar scenario as explained in Fourth item below ].
+
+Purple Cap - Player who taken maximum wickets.
+Orange Cap - Player Who is Scored maximum runs in the Season.
+Most Consistent - Define a standard for consistency and measure the same.
+Performance Increase/Degrade : Define a standard for performance and measure the same.
+
+create database ipl1;
+use ipl1;
+create table lteam(tname varchar(20),tcaptain varchar(20),tcoach varchar(20),towner varchar(20));
+create table lplayer(pname varchar(20),pavg int,phighscore int ,noofmatches int);
+create table lschedule(date varchar(20),time varchar(20),team1 varchar(20) ,team2 varchar(20));
+
+create table precordbat(pname varchar(20),p1score int,p2score int,p3score int);
+create table precordbowl(pname varchar(20),p1wi int,p2wi int,p3wi int);
+create table match(date varchar(20),time varchar(20),tname1 varchar(20),t1score int,tname2 varchar(20),t2score int);
+
+
+insert into precord values("dhoni",20,70,89);
+insert into precord values("virat",0,10,123);
+insert into precord values("rohit",20,7,2);
+
+create view orange select pname,p1score+p2score+p3score as ptotscore from precordbat;
+create view purple select pname,p1wi+p2wi+p3wi as ptotwicket from precordbowl;
+
+select pname,ptotscore  from orange order by ptotscore desc limit 1;
+select pname,ptotwicket  from purple order by ptotwickwt desc limit 1;
+
+
+
